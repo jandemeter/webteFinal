@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let elapsedSeconds = 0;
   let timerInterval;
   let currentLevel = 1;
+  let questionAnswered = false; // Flag to track if the question has been answered
 
   async function fetchData() {
     try {
@@ -136,35 +137,43 @@ document.addEventListener("DOMContentLoaded", function () {
     const optionButton = document.createElement("button");
     optionButton.textContent = countries[index].name;
     optionButton.classList.add("option-button");
-
-    optionButton.addEventListener("click", () => {
-      clearInterval(timerInterval);
-
-      if (isCorrect) {
-        console.log("Correct!");
-        updateScore();
-        if (score < 1) {
-          showNextFlag();
-        } else {
-          // Move to the next level
-          currentLevel++;
-          score = 0;
-          updateScore();
-          if (currentLevel <= 5) {
-            fetchData();
-            showModal(); // Show modal when level is completed
-          } else {
-            // Quiz completed, you can add your completion logic here
-            console.log("Quiz completed!");
-          }
-        }
-      } else {
-        console.log("Wrong!");
-        resetGame();
-      }
+  
+    optionButton.addEventListener("mouseover", function () {
+      handleMouseOver(isCorrect);
     });
     optionsContainer.appendChild(optionButton);
   }
+
+  function handleMouseOver(isCorrect) {
+  if (!questionAnswered) {
+    clearInterval(timerInterval);
+
+    if (isCorrect) {
+      console.log("Correct!");
+      updateScore();
+      if (score < 10) {
+        showNextFlag();
+      } else {
+        currentLevel++;
+        score = 0;
+        updateScore();
+        if (currentLevel <= 5) {
+          fetchData();
+          showModal();
+        } else {
+          console.log("Quiz completed!");
+        }
+      }
+    } else {
+      console.log("Wrong!");
+      resetGame();
+    }
+
+    questionAnswered = true;
+  } else {
+    questionAnswered = false;
+  }
+}
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
@@ -177,8 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function simulateButtonClick(button) {
-    const clickEvent = new Event("click");
-    button.dispatchEvent(clickEvent);
+    const hoverEvent = new Event("mouseover");
+    button.dispatchEvent(hoverEvent);
   }
 
   function showModal() {
