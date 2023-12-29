@@ -199,7 +199,19 @@ document.addEventListener("DOMContentLoaded", function () {
     modalContainer.style.display = 'none';
     quizContainer.style.display = 'block';
 
+    // Reset the timer to 5 seconds for each question in the next level
+    timeLeft = 5;
+
     // Additional logic for handling the modal close
+  }
+
+  // Event listener for the "Next Level" button
+  const nextLevelButton = document.querySelector('.modal-button');
+  if (nextLevelButton) {
+    nextLevelButton.addEventListener("click", function () {
+      console.log("Next Level button clicked");
+      nextLevel();
+    });
   }
 
   fetchData();

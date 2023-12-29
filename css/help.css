@@ -1,9 +1,9 @@
-html{
+html {
     background-color: #8884ff;
 }
 
 body {
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff; /* Biely pozadie */
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -13,34 +13,45 @@ body {
     margin: 0;
     background-color: #8884ff;
 }
-.menu-container{
+
+.help-container {
     background-color: #ffffff;
     border-radius: 10px;
-    height: 80%;
-    width: 50%;
+    padding: 20px;
     text-align: center;
+    width: 50%;
+    margin-top: 10%;
 }
 
+.help-container h1 {
+    color: #8884ff;
+}
 
-#helpLink,
-#startLink {
+.help-container h2 {
+    color: #640064;
+    margin-top: 20px;
+}
+
+.help-container p {
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.help-container a {
     background-color: #8884ff;
     color: white;
     padding: 10px 20px;
-    font-size: 35px;
+    font-size: 20px;
     font-weight: bold;
-    text-decoration: none; /* Odstaní podčiarknutie odkazu */
-    display: inline-block; /* Umožní nastavenie šírky a výšky */
+    text-decoration: none;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 50%;
-    margin-top: 5%;
-    height: 20%;
+    margin-top: 20px;
 }
 
-#helpLink:hover,
-#startLink:hover {
+.help-container a:hover {
     background-color: #640064;
 }
-
