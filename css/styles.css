@@ -1,4 +1,4 @@
-body {
+.quiz-window {
   background-color: #8884ff;
   font-family: 'Roboto', sans-serif;
   display: flex;
@@ -6,9 +6,11 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
+  width: 100%;
 }
 
 .quiz-container {
+  display: block;
   background-color: white;
   text-align: center;
   border-radius: 10px;

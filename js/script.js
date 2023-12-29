@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let countries = [];
   let currentIndex = -1;
   let score = 1;
-  let timeLeft = 5; // Set initial time to 60 seconds for each level
+  let timeLeft = 5; // Set initial time to 5 seconds for each flag
   let elapsedSeconds = 0;
   let timerInterval;
   let currentLevel = 1;
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (currentLevel === 4) {
         countries = data.flags.America;
       } else if (currentLevel === 5) {
-        countries = data.flags["Asia + Arica"];
+        countries = data.flags["Asia + Africa"];
       }
 
       shuffleArray(countries);
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
       createOptionButton(indexes[1], true);
     }
 
-    timeLeft = 5; // Reset time to 60 seconds for each question
+    timeLeft = 5; // Reset time to 5 seconds for each question
 
     clearInterval(timerInterval);
     timerInterval = setInterval(updateTimer, 1000);
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isCorrect) {
         console.log("Correct!");
         updateScore();
-        if (score < 11) {
+        if (score < 1) {
           showNextFlag();
         } else {
           // Move to the next level
@@ -152,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
           updateScore();
           if (currentLevel <= 5) {
             fetchData();
+            showModal(); // Show modal when level is completed
           } else {
             // Quiz completed, you can add your completion logic here
             console.log("Quiz completed!");
@@ -169,15 +170,36 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
       // Simulate a click on the left option button
       simulateButtonClick(optionsContainer.firstChild);
-  } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
+    } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
       // Simulate a click on the right option button
       simulateButtonClick(optionsContainer.lastChild);
-  }
+    }
   });
 
   function simulateButtonClick(button) {
     const clickEvent = new Event("click");
     button.dispatchEvent(clickEvent);
+  }
+
+  function showModal() {
+    const modalContainer = document.querySelector('.modal-container');
+    const quizContainer = document.querySelector('.quiz-container');
+
+    // Display the modal and confetti canvas
+    modalContainer.style.display = 'block';
+    quizContainer.style.display = 'none';
+
+    // Additional logic for handling the modal display
+  }
+
+  function nextLevel() {
+    const modalContainer = document.querySelector('.modal-container');
+    const quizContainer = document.querySelector('.quiz-container');
+
+    modalContainer.style.display = 'none';
+    quizContainer.style.display = 'block';
+
+    // Additional logic for handling the modal close
   }
 
   fetchData();
