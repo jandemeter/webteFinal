@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentIndex = (currentIndex + 1) % countries.length;
     const currentCountry = countries[currentIndex];
     flagImage.src = currentCountry.flag;
+    flagImage.style.border = "1px solid #000";
 
     // Clear previous options
     optionsContainer.innerHTML = "";
@@ -63,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Start or restart the timer
     clearInterval(timerInterval);
-    timerInterval = setInterval(updateTimer, 1000);
+    timerInterval = setInterval(updateTimer, 500);
   }
 
   function showRandomOptions() {
@@ -91,29 +92,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateTimer() {
     elapsedSeconds++;
-    timerElement.textContent = "Time: " + elapsedSeconds + "s";
+    timerElement.textContent = "TIME: " + elapsedSeconds + "s";
 
     // Increase difficulty by reducing the available time as the game progresses
     if (elapsedSeconds % 10 === 0) {
       timeLeft = Math.max(1, timeLeft - 1);
     }
 
-    
+
   }
 
   function updateScore() {
     score++;
-    scoreElement.textContent = "Score: " + score +"/47";
+    scoreElement.textContent = "QUESTION " + score + " OUT OF 47";
   }
 
   function resetGame() {
+    document.getElementById("quiz-container").style.backgroundColor = "#ff4d4d";
+    setTimeout(() => {
+      document.getElementById("quiz-container").style.backgroundColor = "";
+
+      showNextFlag();
+    }, 500);
+
     // Reset score and elapsed time
     score = 0;
     elapsedSeconds = 0;
-    scoreElement.textContent = "Score: 0/47";
-    timerElement.textContent = "Time: 0s";
+    scoreElement.textContent = "QUESTION 0 OUT OF 47";
+    timerElement.textContent = "TIME: 0s";
     clearInterval(timerInterval);
-    showNextFlag();
   }
 
   function createOptionButton(index, isCorrect) {
@@ -128,12 +135,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Handle correct answer logic
         console.log("Correct!");
         updateScore();
+        showNextFlag();
       } else {
         // Handle wrong answer logic
         console.log("Wrong!");
         resetGame();
       }
-      showNextFlag()
     });
     optionsContainer.appendChild(optionButton);
   }
