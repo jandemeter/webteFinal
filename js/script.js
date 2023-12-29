@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isCorrect) {
         console.log("Correct!");
         updateScore();
-        if (score < 1) {
+        if (score < 11) {
           showNextFlag();
         } else {
           // Move to the next level
@@ -190,16 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
     quizContainer.style.display = 'none';
 
     // Additional logic for handling the modal display
-  }
-
-  function nextLevel() {
-    const modalContainer = document.querySelector('.modal-container');
-    const quizContainer = document.querySelector('.quiz-container');
-
-    modalContainer.style.display = 'none';
-    quizContainer.style.display = 'block';
-
-    // Additional logic for handling the modal close
   }
 
   fetchData();
