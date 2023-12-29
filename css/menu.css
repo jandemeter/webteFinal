@@ -1,0 +1,27 @@
+body {
+    background-color: #ffffff; /* White background */
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#startButton {
+    background-color: #8884ff;
+  color: white;
+  padding: 10px 20px; 
+  font-size: 35px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+  width: 50%;
+  margin: 5%;
+  height: 20%;
+}
+
+#startButton:hover {
+    background-color: #640064; 
+}

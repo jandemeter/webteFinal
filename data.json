@@ -71,7 +71,7 @@
       { "name": "Kanada", "flag": "./../flags/kanada.png" }
     ],
 
-    "Asia + Arica": [
+    "Asia + Africa": [
       { "name": "Vietnam", "flag": "./../flags/vietnam.png" },
       { "name": "Thajsko", "flag": "./../flags/thajsko.png" },
       { "name": "Pakistan", "flag": "./../flags/pakistan.png" },
