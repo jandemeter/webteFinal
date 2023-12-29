@@ -6,18 +6,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let countries = [];
   let currentIndex = -1;
-  let score = 0;
-  let timeLeft = 0; // Updated initial value for time
-  let elapsedSeconds = 0; // New variable to track elapsed time
+  let score = 1;
+  let timeLeft = 5; // Set initial time to 60 seconds for each level
+  let elapsedSeconds = 0;
   let timerInterval;
+  let currentLevel = 1;
 
   async function fetchData() {
     try {
       const response = await fetch("../data.json");
       const data = await response.json();
-      countries = data.countries;
 
-      // Shuffle the array of countries
+      if (currentLevel === 1) {
+        countries = data.flags.Europe1;
+      } else if (currentLevel === 2) {
+        countries = data.flags.Europe2;
+      } else if (currentLevel === 3) {
+        countries = data.flags.Europe3;
+      } else if (currentLevel === 4) {
+        countries = data.flags.America;
+      } else if (currentLevel === 5) {
+        countries = data.flags["Asia + Arica"];
+      }
+
       shuffleArray(countries);
 
       showNextFlag();
@@ -33,10 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
     flagImage.src = currentCountry.flag;
     flagImage.style.border = "1px solid #000";
 
-    // Clear previous options
     optionsContainer.innerHTML = "";
 
-    // Generate one correct and one wrong answer
     const correctAnswerIndex = currentIndex;
     const wrongAnswerIndex = getRandomIndexes(
       countries.length,
@@ -44,31 +53,25 @@ document.addEventListener("DOMContentLoaded", function () {
       correctAnswerIndex
     )[0];
 
-    // Create an array to hold both indexes
     const indexes = [correctAnswerIndex, wrongAnswerIndex];
 
-    // Shuffle the array to randomize button positions
     shuffleArray(indexes);
 
-    // Create option buttons based on shuffled indexes
     if (indexes[0] == currentIndex) {
-      createOptionButton(indexes[0], true); // Correct answer
-      createOptionButton(indexes[1], false); // Wrong answer
+      createOptionButton(indexes[0], true);
+      createOptionButton(indexes[1], false);
     } else {
-      createOptionButton(indexes[0], false); // Correct answer
-      createOptionButton(indexes[1], true); // Wrong answer
+      createOptionButton(indexes[0], false);
+      createOptionButton(indexes[1], true);
     }
 
-    // Reset time left
-    timeLeft = 0;
+    timeLeft = 5; // Reset time to 60 seconds for each question
 
-    // Start or restart the timer
     clearInterval(timerInterval);
-    timerInterval = setInterval(updateTimer, 500);
+    timerInterval = setInterval(updateTimer, 1000);
   }
 
   function showRandomOptions() {
-    // Show options on page load
     showNextFlag();
   }
 
@@ -92,19 +95,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateTimer() {
     elapsedSeconds++;
-    timerElement.textContent = "TIME: " + elapsedSeconds + "s";
+    timerElement.textContent = "TIME: " + timeLeft + "s";
+
+    if (timeLeft === 0) {
+      // Time is up, treat it as a wrong answer
+      console.log("Time's up!");
+      resetGame();
+    }
+
+    // Decrease time by 1 second
+    timeLeft--;
 
     // Increase difficulty by reducing the available time as the game progresses
     if (elapsedSeconds % 10 === 0) {
       timeLeft = Math.max(1, timeLeft - 1);
     }
-
-
   }
 
   function updateScore() {
     score++;
-    scoreElement.textContent = "QUESTION " + score + " OUT OF 47";
+    scoreElement.textContent = `LEVEL ${currentLevel} - QUESTION ${score} OUT OF 10`;
   }
 
   function resetGame() {
@@ -115,10 +125,9 @@ document.addEventListener("DOMContentLoaded", function () {
       showNextFlag();
     }, 500);
 
-    // Reset score and elapsed time
-    score = 0;
+    score = 1;
     elapsedSeconds = 0;
-    scoreElement.textContent = "QUESTION 0 OUT OF 47";
+    scoreElement.textContent = `LEVEL ${currentLevel} - QUESTION 1 OUT OF 10`;
     timerElement.textContent = "TIME: 0s";
     clearInterval(timerInterval);
   }
@@ -129,15 +138,26 @@ document.addEventListener("DOMContentLoaded", function () {
     optionButton.classList.add("option-button");
 
     optionButton.addEventListener("click", () => {
-      clearInterval(timerInterval); // Stop the timer on button click
+      clearInterval(timerInterval);
 
       if (isCorrect) {
-        // Handle correct answer logic
         console.log("Correct!");
         updateScore();
-        showNextFlag();
+        if (score < 11) {
+          showNextFlag();
+        } else {
+          // Move to the next level
+          currentLevel++;
+          score = 0;
+          updateScore();
+          if (currentLevel <= 5) {
+            fetchData();
+          } else {
+            // Quiz completed, you can add your completion logic here
+            console.log("Quiz completed!");
+          }
+        }
       } else {
-        // Handle wrong answer logic
         console.log("Wrong!");
         resetGame();
       }
@@ -145,15 +165,14 @@ document.addEventListener("DOMContentLoaded", function () {
     optionsContainer.appendChild(optionButton);
   }
 
-  // Event listener for left and right arrow keys
   document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowLeft") {
+    if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
       // Simulate a click on the left option button
       simulateButtonClick(optionsContainer.firstChild);
-    } else if (event.key === "ArrowRight") {
+  } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
       // Simulate a click on the right option button
       simulateButtonClick(optionsContainer.lastChild);
-    }
+  }
   });
 
   function simulateButtonClick(button) {
@@ -161,6 +180,5 @@ document.addEventListener("DOMContentLoaded", function () {
     button.dispatchEvent(clickEvent);
   }
 
-  // Fetch data from data.json and display the first flag on page load
   fetchData();
 });
