@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const optionButton = document.createElement("button");
     optionButton.textContent = countries[index].name;
     optionButton.classList.add("option-button");
-  
+
     optionButton.addEventListener("mouseover", function () {
       handleMouseOver(isCorrect);
     });
@@ -145,36 +145,40 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleMouseOver(isCorrect) {
-  if (!questionAnswered) {
-    clearInterval(timerInterval);
+    if (!questionAnswered) {
+      clearInterval(timerInterval);
 
-    if (isCorrect) {
-      console.log("Correct!");
-      updateScore();
-      if (score < 11) {
-        showNextFlag();
-      } else {
-        currentLevel++;
-        score = 0;
+      if (isCorrect) {
+        console.log("Correct!");
         updateScore();
-        if (currentLevel <= 5) {
-          fetchData();
-          showModal();
+        flagImage.style.border = "10px solid #4CAF50";
+        if (score < 11) {
+          setTimeout(() => {
+            showNextFlag();
+            flagImage.style.border = "1px solid #000";
+          }, 1000);
         } else {
-          console.log("Quiz completed!");
-          window.location.href = 'congratulations.html';
+          currentLevel++;
+          score = 0;
+          updateScore();
+          if (currentLevel <= 5) {
+            fetchData();
+            showModal();
+          } else {
+            console.log("Quiz completed!");
+            window.location.href = 'congratulations.html';
+          }
         }
+      } else {
+        console.log("Wrong!");
+        resetGame();
       }
-    } else {
-      console.log("Wrong!");
-      resetGame();
-    }
 
-    questionAnswered = true;
-  } else {
-    questionAnswered = false;
+      questionAnswered = true;
+    } else {
+      questionAnswered = false;
+    }
   }
-}
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
