@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (isCorrect) {
       console.log("Correct!");
       updateScore();
-      if (score < 10) {
+      if (score < 11) {
         showNextFlag();
       } else {
         currentLevel++;
@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
           showModal();
         } else {
           console.log("Quiz completed!");
+          window.location.href = 'congratulations.html';
         }
       }
     } else {
@@ -207,14 +208,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modalContainer.style.display = 'none';
     quizContainer.style.display = 'block';
-
-    // Reset the timer to 5 seconds for each question in the next level
     timeLeft = 5;
-
-    // Additional logic for handling the modal close
   }
 
-  // Event listener for the "Next Level" button
   const nextLevelButton = document.querySelector('.modal-button');
   if (nextLevelButton) {
     nextLevelButton.addEventListener("click", function () {

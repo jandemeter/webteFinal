@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Congratulations Modal</title>
-    <link rel="stylesheet" href="./../css/next-level.css" />
-</head>
-<body>
+    <link rel="stylesheet" href="./../css/congratulations.css" />
+  </head>
+  <body>
     <div class="modal-container">
-        <div class="modal-header">Congratulations!</div>
-        <div class="modal-content">
-            Nice! 
-        </div>
-        <button class="modal-button" onclick="closeModal()">Close</button>
+      <div class="modal-header">Congratulations!</div>
+      <div class="buttons-container">
+        <a href="./index.html" class="menu-button">Menu</a>
+        <a href="./quiz.html" class="quiz-button">Play again</a>
+      </div>
     </div>
     <canvas id="confetti"></canvas>
-    <script src="./../js/next-level.js"></script>
-</body>
+    <script src="./../js/script.js"></script>
+    <script src="./../js/confetti.js"></script>
+  </body>
 </html>
