@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       shuffleArray(countries);
 
+      questionAnswered = false;
       showNextFlag();
       showRandomOptions();
     } catch (error) {
@@ -202,6 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   hintImage.addEventListener("mouseout", function () {
     hideCorrectAnswer(correctAnswerElement); // Hide the correct answer when not hovering over the lightbulb
+  });
+
+  optionsContainer.addEventListener("mouseleave", function () {
+    questionAnswered = false;
   });
 
   document.addEventListener("keydown", function (event) {
