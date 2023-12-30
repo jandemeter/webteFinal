@@ -253,6 +253,10 @@ document.addEventListener("DOMContentLoaded", function () {
       nextLevel();
     });
   }
+  // JavaScript to handle button click event
+  document.getElementById('go-to-index').addEventListener('click', function() {
+    window.location.href = './index.html';
+  });
 
   fetchData();
 });

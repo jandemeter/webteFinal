@@ -8,11 +8,23 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Add the blue background outside the box */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #8884ff; /* Blue background color */
+    z-index: -2; /* Set a z-index behind everything */
+}
+
 .modal-container {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    padding: 200px;
+    padding: 20px; /* Adjusted padding */
     text-align: center;
 }
 
@@ -38,7 +50,12 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-bottom: 10px;
-    /* Add margin between buttons */
+    text-decoration: none; /* Remove underline */
+}
+
+.menu-button:hover,
+.quiz-button:hover {
+    background-color: #6060a0; /* Change background color on hover */
 }
 
 .menu-button a,
@@ -59,4 +76,5 @@ body {
     height: 100%;
     position: absolute;
     top: 0;
+    z-index: -1; /* Set a negative z-index to move it behind other elements */
 }

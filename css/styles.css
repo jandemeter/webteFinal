@@ -82,3 +82,22 @@
   margin-top: 1%;
   font-weight: bold;
 }
+
+
+#go-to-index {
+  margin-top: 5%;
+  background-color: #8884ff;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#go-to-index:hover {
+  background-color: #6060a0;
+}
+
+
