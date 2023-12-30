@@ -136,21 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
     clearInterval(timerInterval);
   }
 
-  function createOptionButton(index, isCorrect) {
-    const optionButton = document.createElement("button");
-    optionButton.textContent = countries[index].name;
-    optionButton.classList.add("option-button");
-
-    optionButton.addEventListener("mouseover", function () {
-      handleMouseOver(isCorrect);
-    });
-    optionsContainer.appendChild(optionButton);
-  }
-
   function handleMouseOver(isCorrect) {
     if (!questionAnswered) {
       clearInterval(timerInterval);
-  
+
       if (isCorrect) {
         console.log("Correct!");
         updateScore();
@@ -176,13 +165,26 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Wrong!");
         resetGame();
       }
-  
+
       questionAnswered = true;
     } else {
       questionAnswered = false;
     }
   }
-  
+  function createOptionButton(index, isCorrect) {
+    const optionButton = document.createElement("button");
+    optionButton.textContent = countries[index].name;
+    optionButton.classList.add("option-button");
+
+    optionButton.addEventListener("mouseover", function () {
+      handleMouseOver(isCorrect);
+    });
+
+    optionsContainer.appendChild(optionButton);
+  }
+
+
+
   function showCorrectAnswer(element) {
     const correctIndex = currentIndex;
     const correctCountry = countries[correctIndex];
@@ -204,9 +206,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
+      questionAnswered = false;
       // Simulate a click on the left option button
       simulateButtonClick(optionsContainer.firstChild);
     } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
+      questionAnswered = false;
       // Simulate a click on the right option button
       simulateButtonClick(optionsContainer.lastChild);
     }
