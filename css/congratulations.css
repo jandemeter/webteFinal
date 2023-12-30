@@ -23,7 +23,7 @@ body::before {
 .modal-container {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 15px;
     padding: 20px; /* Adjusted padding */
     text-align: center;
 }
@@ -46,7 +46,7 @@ body::before {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin-bottom: 10px;

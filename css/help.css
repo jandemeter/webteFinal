@@ -16,11 +16,10 @@ body {
 
 .help-container {
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 20px;
     text-align: center;
     width: 50%;
-    margin-top: 10%;
 }
 
 .help-container h1 {
@@ -37,9 +36,15 @@ body {
     font-size: 18px;
     line-height: 1.6;
     margin-top: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
-.help-container a {
+.buttons-container {
+    margin-bottom: 5%;
+}
+
+.buttons-container a {
     background-color: #8884ff;
     color: white;
     padding: 10px 20px;
@@ -47,7 +52,7 @@ body {
     font-weight: bold;
     text-decoration: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     margin-top: 20px;
 }
@@ -55,3 +60,40 @@ body {
 .help-container a:hover {
     background-color: #640064;
 }
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #print-image {
+    width: 30px; /* Set your desired width */
+    height: 30px; /* Set your desired height */
+    align-self: flex-end; /* Align to the right */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  #print-image:hover {
+    transform: scale(1.1); /* Make it 5% bigger on hover */
+  }
+
+  #mobile-controls {
+    width: 50%; /* Set your desired width as a percentage */
+    max-width: 150px; /* Set a maximum width if needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  #computer-controls {
+    width: 70%; /* Set your desired width as a percentage */
+    max-width: 500px; /* Set a maximum width if needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  /* Additional styles for smaller screens */
+  @media only screen and (max-width: 600px) {
+    #mobile-controls, #computer-controls {
+      width: 70%; /* Adjust size for smaller screens */
+    }
+  }
