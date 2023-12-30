@@ -1,33 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Help - Quiz Game</title>
-    <link rel="stylesheet" href="./../css/help.css">
-    <link rel="icon" href="./../flags/slovensko.png" type="image/x-icon">
-</head>
-<body>
+    <link rel="stylesheet" href="./../css/help.css" />
+    <link rel="icon" href="./../flags/slovensko.png" type="image/x-icon" />
+  </head>
+  <body>
     <div class="help-container">
-        <h1>Quiz Game Help</h1>
+      <div class="header-container">
+        <img id="print-image" src="./../resources/printer.png" alt="print" />
+        <h1>Instructions & rules</h1>
+      </div>
 
-        <h2>Level Selection:</h2>
-        <p>
-            To select the left option, press "A" key or click on the left arrow. To select the right option, press "D" key or click on the right arrow.
-            Alternatively, you can tilt your mobile device to the left to choose the left option and tilt it to the right to choose the right option.
-        </p>
+      <h2>Mobile</h2>
+      <img id="mobile-controls" src="./../resources/mobile-tilt.png" alt="print" />
+      <p>
+        To select the left option you can tilt your mobile device to the left to
+        choose the left option and tilt it to the right to choose the right
+        option.
+      </p>
 
-        <h2>Game Rules:</h2>
-        <p>
-            The game consists of 5 levels, and each level has 10 questions. You have 5 seconds to answer each question.
-            If you answer a question incorrectly or the time runs out, the game will restart from the beginning.
-        </p>
+      <h2>Computer</h2>
+      <img id="computer-controls" src="./../resources/wasd.png" alt="print" />
+      <p>
+        To select the left option, press "A" key or click on the left arrow. To
+        select the right option, press "D" key or click on the right arrow.
+        Also, you can choose the answer by hovering above the choice with your
+        mouse.
+      </p>
 
+      <div class="buttons-container">
         <!-- Odkaz na menu.html -->
         <a href="./index.html" class="nav-link">Go to Menu</a>
-        
+
         <!-- Odkaz na quiz.html -->
         <a href="./quiz.html" class="nav-link">Start Playing</a>
+      </div>
     </div>
-</body>
+    <script>
+      // Function to print the page
+      function printPage() {
+        window.print();
+      }
+
+      // Attach the printPage function to the click event of the print-image
+      document
+        .getElementById("print-image")
+        .addEventListener("click", printPage);
+    </script>
+  </body>
 </html>
