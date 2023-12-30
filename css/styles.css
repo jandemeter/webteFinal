@@ -14,7 +14,7 @@
   background-color: white;
   text-align: center;
   border-radius: 10px;
-  height: 80%;
+  height: 90%;
   width: 50%;
 }
 
@@ -37,7 +37,7 @@
 .option-button {
   background-color: #8884ff;
   color: white;
-  padding: 10px 20px; 
+  padding: 50px 20px; 
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -45,6 +45,13 @@
   cursor: pointer;
   width: 50%;
   margin: 5%;
+}
+
+.correct-answer {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 10px;
+  display: none;
 }
 
 #flag-image {
@@ -56,6 +63,14 @@
   margin-top: 5%;
   max-height: 70%;
   border: 1px solid #000;
+}
+
+#hint-image {
+  height: 5%;
+  position: absolute;
+  bottom: 7%; /* Adjust this value to your preference */
+  left: 50%; 
+  transform: translateX(-50%);
 }
 
 #score {

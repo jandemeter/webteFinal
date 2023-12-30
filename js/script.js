@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const optionsContainer = document.getElementById("options-container");
   const scoreElement = document.getElementById("score");
   const timerElement = document.getElementById("timer");
+  const hintImage = document.getElementById("hint-image");
+  const correctAnswerElement = document.getElementById("correct-answer");
+
 
   let countries = [];
   let currentIndex = -1;
@@ -147,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function handleMouseOver(isCorrect) {
     if (!questionAnswered) {
       clearInterval(timerInterval);
-
+  
       if (isCorrect) {
         console.log("Correct!");
         updateScore();
@@ -156,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
           setTimeout(() => {
             showNextFlag();
             flagImage.style.border = "1px solid #000";
-          }, 1000);
+          }, 600);
         } else {
           currentLevel++;
           score = 0;
@@ -173,12 +176,31 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Wrong!");
         resetGame();
       }
-
+  
       questionAnswered = true;
     } else {
       questionAnswered = false;
     }
   }
+  
+  function showCorrectAnswer(element) {
+    const correctIndex = currentIndex;
+    const correctCountry = countries[correctIndex];
+    element.textContent = `${correctCountry.name}`;
+    element.style.display = "block"; // Show the correct answer
+  }
+
+  function hideCorrectAnswer(element) {
+    element.style.display = "none"; // Hide the correct answer
+  }
+
+  hintImage.addEventListener("mouseover", function () {
+    showCorrectAnswer(correctAnswerElement); // Show the correct answer when hovering over the lightbulb
+  });
+
+  hintImage.addEventListener("mouseout", function () {
+    hideCorrectAnswer(correctAnswerElement); // Hide the correct answer when not hovering over the lightbulb
+  });
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
