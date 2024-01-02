@@ -2,7 +2,7 @@ let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 const canvas = document.getElementById('confetti');
 const context = canvas.getContext("2d");
-const maxConfettis = 1000;
+const maxConfettis = 700;
 const confettiParticles = [];
 const flagImages = [];
 
@@ -45,10 +45,10 @@ function getRandomInt(min, max) {
 function ConfettiParticle() {
     this.x = Math.random() * screenWidth;
     this.y = Math.random() * screenHeight;
-    this.radius = getRandomInt(15, 40); // Adjusted for slightly larger flags
+    this.radius = getRandomInt(15, 40); 
     this.flagImage = flagImages[getRandomInt(0, flagImages.length - 1)];
-    this.velocityX = getRandomInt(-8, 8);
-    this.velocityY = getRandomInt(-12, -6);
+    this.velocityX = getRandomInt(-12, 12); 
+    this.velocityY = getRandomInt(-18, -9);
     this.rotation = getRandomInt(0, 360);
 
     this.draw = function () {

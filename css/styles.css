@@ -22,7 +22,6 @@
 .right {
   background-color: #8884ff;
   height: 100%;
-  flex: 1; /* Add flex: 1 to make the left and right divs take up equal space */
 }
 
 .flag-container {
@@ -42,9 +41,12 @@
   font-weight: bold;
   border: none;
   border-radius: 15px; 
-  cursor: pointer;
   width: 50%;
   margin: 5%;
+}
+
+.option-button:hover {
+  background-color: #b8b0c9;
 }
 
 .correct-answer {
@@ -68,7 +70,7 @@
 #hint-image {
   height: 5%;
   position: absolute;
-  bottom: 7%; /* Adjust this value to your preference */
+  bottom: 7%; 
   left: 50%; 
   transform: translateX(-50%);
 }
@@ -100,4 +102,42 @@
   background-color: #6060a0;
 }
 
+@media only screen and (max-width: 1300px) {
+  .quiz-container {
+    width: 80%; 
+  }
 
+  .option-button {
+    font-size: 14px;
+    width: 90%;
+  }
+
+  #score {
+    font-size: 15px;
+  }
+
+  #timer {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #flag-image {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .quiz-container {
+    width: 90%;
+  }
+
+  .option-button {
+    font-size: 20px;
+    width: 100%;
+  }
+
+  #flag-image {
+    margin-top: 20%;
+  }
+}
