@@ -177,6 +177,14 @@ document.addEventListener("DOMContentLoaded", function () {
     optionButton.textContent = countries[index].name;
     optionButton.classList.add("option-button");
 
+    optionButton.addEventListener('click', function (event) {
+      event.stopPropagation(); 
+    });
+
+    optionButton.addEventListener('mousedown', function (event) {
+      event.preventDefault(); 
+    });
+
     optionButton.addEventListener("mouseover", function () {
       handleMouseOver(isCorrect);
     });
@@ -213,10 +221,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
       questionAnswered = false;
       // Simulate a click on the left option button
+      optionsContainer.firstChild.style.backgroundColor = "#b8b0c9";
       simulateButtonClick(optionsContainer.firstChild);
     } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
       questionAnswered = false;
       // Simulate a click on the right option button
+      optionsContainer.lastChild.style.backgroundColor = "#b8b0c9";
       simulateButtonClick(optionsContainer.lastChild);
     }
   });

@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background-color: #ffffff; /* Biely pozadie */
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -68,32 +68,42 @@ body {
   }
   
   #print-image {
-    width: 30px; /* Set your desired width */
-    height: 30px; /* Set your desired height */
-    align-self: flex-end; /* Align to the right */
+    width: 30px; 
+    height: 30px; 
+    align-self: flex-end; 
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
   #print-image:hover {
-    transform: scale(1.1); /* Make it 5% bigger on hover */
+    transform: scale(1.1); 
   }
 
   #mobile-controls {
-    width: 50%; /* Set your desired width as a percentage */
-    max-width: 150px; /* Set a maximum width if needed */
-    height: auto; /* Maintain aspect ratio */
+    width: 50%; 
+    max-width: 150px; 
+    height: auto; 
   }
   
   #computer-controls {
-    width: 70%; /* Set your desired width as a percentage */
-    max-width: 500px; /* Set a maximum width if needed */
-    height: auto; /* Maintain aspect ratio */
+    width: 70%; 
+    max-width: 500px; 
+    height: auto; 
   }
-  
-  /* Additional styles for smaller screens */
+
   @media only screen and (max-width: 600px) {
-    #mobile-controls, #computer-controls {
-      width: 70%; /* Adjust size for smaller screens */
+    .help-container {
+        width: 80%;
+        height: 90%;
+        font-size: 8px;
     }
-  }
+
+    .buttons-container a {
+        font-size: 14px;
+    }
+
+    #mobile-controls,
+    #computer-controls {
+        width: 90%;
+    }
+}
