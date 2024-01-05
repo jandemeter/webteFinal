@@ -38,13 +38,3 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-#confetti {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    width: 100%;
-    margin: 0;
-    height: 100%;
-    position: absolute;
-    top: 0;
-  }
