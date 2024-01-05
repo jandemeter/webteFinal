@@ -6,21 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const hintImage = document.getElementById("hint-image");
   const correctAnswerElement = document.getElementById("correct-answer");
 
-
   let countries = [];
   let currentIndex = -1;
-  let score = 1;
   let timeLeft = 5; // Set initial time to 5 seconds for each flag
   let elapsedSeconds = 0;
   let timerInterval;
-  let currentLevel = 1;
   let questionAnswered = false; // Flag to track if the question has been answered
+  let currentLevel = 1;
+  let score = 1;
+
+  currentLevel = parseInt(localStorage.getItem("currentLevel")) || 1;
+  score = parseInt(localStorage.getItem("score")) || 1;
 
   async function fetchData() {
     try {
       const response = await fetch("../data.json");
       const data = await response.json();
 
+      scoreElement.textContent = `LEVEL ${currentLevel} - QUESTION ${score} OUT OF 10`;
       if (currentLevel === 1) {
         countries = data.flags.Europe1;
       } else if (currentLevel === 2) {
@@ -104,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (timeLeft === 0) {
       // Time is up, treat it as a wrong answer
-      console.log("Time's up!");
       resetGame();
     }
 
@@ -120,6 +122,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateScore() {
     score++;
     scoreElement.textContent = `LEVEL ${currentLevel} - QUESTION ${score} OUT OF 10`;
+    localStorage.setItem("score", score);
+    localStorage.setItem("currentLevel", currentLevel);
   }
 
   function resetGame() {
@@ -135,6 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
     scoreElement.textContent = `LEVEL ${currentLevel} - QUESTION 1 OUT OF 10`;
     timerElement.textContent = "TIME: 0s";
     clearInterval(timerInterval);
+    localStorage.setItem("score", score);
+    localStorage.setItem("currentLevel", currentLevel);
   }
 
   function handleMouseOver(isCorrect) {
@@ -158,8 +164,9 @@ document.addEventListener("DOMContentLoaded", function () {
             fetchData();
             showModal();
           } else {
-            console.log("Quiz completed!");
-            window.location.href = 'congratulations.html';
+            localStorage.setItem("currentLevel", 1);
+            console.log("nastavil osm na 1");
+            window.location.href = "congratulations.html";
           }
         }
       } else {
@@ -177,13 +184,13 @@ document.addEventListener("DOMContentLoaded", function () {
     optionButton.textContent = countries[index].name;
     optionButton.classList.add("option-button");
 
-    optionButton.addEventListener('click', function (event) {
-      event.stopPropagation(); 
-    });
+    // optionButton.addEventListener("click", function (event) {
+    //   event.stopPropagation();
+    // });
 
-    optionButton.addEventListener('mousedown', function (event) {
-      event.preventDefault(); 
-    });
+    // optionButton.addEventListener("mousedown", function (event) {
+    //   event.preventDefault();
+    // });
 
     optionButton.addEventListener("mouseover", function () {
       handleMouseOver(isCorrect);
@@ -191,8 +198,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     optionsContainer.appendChild(optionButton);
   }
-
-
 
   function showCorrectAnswer(element) {
     const correctIndex = currentIndex;
@@ -223,7 +228,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // Simulate a click on the left option button
       optionsContainer.firstChild.style.backgroundColor = "#b8b0c9";
       simulateButtonClick(optionsContainer.firstChild);
-    } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
+    } else if (
+      event.key === "ArrowRight" ||
+      event.key === "d" ||
+      event.key === "D"
+    ) {
       questionAnswered = false;
       // Simulate a click on the right option button
       optionsContainer.lastChild.style.backgroundColor = "#b8b0c9";
@@ -237,26 +246,26 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showModal() {
-    const modalContainer = document.querySelector('.modal-container');
-    const quizContainer = document.querySelector('.quiz-container');
+    const modalContainer = document.querySelector(".modal-container");
+    const quizContainer = document.querySelector(".quiz-container");
 
     // Display the modal and confetti canvas
-    modalContainer.style.display = 'block';
-    quizContainer.style.display = 'none';
+    modalContainer.style.display = "block";
+    quizContainer.style.display = "none";
 
     // Additional logic for handling the modal display
   }
 
   function nextLevel() {
-    const modalContainer = document.querySelector('.modal-container');
-    const quizContainer = document.querySelector('.quiz-container');
+    const modalContainer = document.querySelector(".modal-container");
+    const quizContainer = document.querySelector(".quiz-container");
 
-    modalContainer.style.display = 'none';
-    quizContainer.style.display = 'block';
+    modalContainer.style.display = "none";
+    quizContainer.style.display = "block";
     timeLeft = 5;
   }
 
-  const nextLevelButton = document.querySelector('.modal-button');
+  const nextLevelButton = document.querySelector(".modal-button");
   if (nextLevelButton) {
     nextLevelButton.addEventListener("click", function () {
       console.log("Next Level button clicked");
@@ -264,9 +273,71 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   // JavaScript to handle button click event
-  document.getElementById('go-to-index').addEventListener('click', function() {
-    window.location.href = './index.html';
+  document.getElementById("go-to-index").addEventListener("click", function () {
+    window.location.href = "../index.html";
   });
+
+  let buttonClickedAfterTilt = false;
+  let debounceTimeout;
+  let initialAlpha;
+
+  window.addEventListener("deviceorientation", function (event) {
+    // Display the current alpha value
+
+    // Adjust alpha value to be in the range [-180, 180]
+    const adjustedAlpha = event.alpha > 180 ? event.alpha - 360 : event.alpha;
+
+    // Check conditions and simulate button click with debounce
+    if (!initialAlpha) {
+      initialAlpha = adjustedAlpha;
+    }
+
+    const angleThreshold = 20; // Adjust the threshold as needed
+
+    if (
+      adjustedAlpha > initialAlpha + angleThreshold &&
+      !buttonClickedAfterTilt
+    ) {
+      debounceButtonClick(optionsContainer.firstChild);
+    } else if (
+      adjustedAlpha < initialAlpha - angleThreshold &&
+      !buttonClickedAfterTilt
+    ) {
+      debounceButtonClick(optionsContainer.lastChild);
+    } else if (
+      adjustedAlpha > initialAlpha - angleThreshold &&
+      adjustedAlpha < initialAlpha + angleThreshold
+    ) {
+      buttonClickedAfterTilt = false;
+    }
+  });
+
+  function debounceButtonClick(button) {
+    if (!buttonClickedAfterTilt) {
+      simulateButtonClick(button);
+      buttonClickedAfterTilt = true;
+
+      // Set a timeout to reset buttonClickedAfterTilt after a certain delay
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {
+        buttonClickedAfterTilt = false;
+      }, 1000); // Adjust the delay as needed
+    }
+  }
 
   fetchData();
 });
+
+window.addEventListener("load", () => {
+  registerSW();
+});
+
+async function registerSW() {
+  if ("serviceWorker" in navigator) {
+    try {
+      await navigator.serviceWorker.register("../sw.js");
+    } catch (e) {
+      console.log(`SW registration failed`);
+    }
+  }
+}

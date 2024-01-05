@@ -1,0 +1,38 @@
+{
+  "name": "FlagMania",
+  "short_name": "FlagMania",
+  "start_url": "/~xdemeterj/vlajky/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "A flag quiz.",
+  "icons": [
+    {
+      "src": "./flags/slovensko512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./flags/slovensko192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+
+  "screenshots": [
+    {
+      "src": "./flags/slovensko.png",
+      "sizes": "3000x2000",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Flags"
+    },
+    {
+      "src": "./flags/slovensko.png",
+      "sizes": "3000x2000",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Flags"
+    }
+  ],
+  "id": "/~xdemeterj/vlajky/"
+}

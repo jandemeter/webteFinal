@@ -20,6 +20,7 @@ body {
     padding: 20px;
     text-align: center;
     width: 50%;
+    overflow-y: auto;
 }
 
 .help-container h1 {

@@ -20,6 +20,7 @@ body {
     height: 80%;
     width: 50%;
     text-align: center;
+    overflow-y: auto;
 }
 
 .rules {
