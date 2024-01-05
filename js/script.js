@@ -249,7 +249,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalContainer = document.querySelector(".modal-container");
     const quizContainer = document.querySelector(".quiz-container");
 
-    // Display the modal and confetti canvas
     modalContainer.style.display = "block";
     quizContainer.style.display = "none";
 
