@@ -43,9 +43,9 @@ body {
     font-size: 35px;
     font-weight: bold;
     text-decoration: none;
-    display: inline-flex; /* inline-flex to enable flex properties on inline elements */
-    align-items: center; /* Vertically align the content to the center */
-    justify-content: center; /* Horizontally align the content to the center */
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center;
     border: none;
     border-radius: 15px;
     cursor: pointer;

@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let countries = [];
   let currentIndex = -1;
   let timeLeft = 5; // Set initial time to 5 seconds for each flag
-  let elapsedSeconds = 0;
   let timerInterval;
-  let questionAnswered = false; // Flag to track if the question has been answered
+  let questionAnswered = false;
   let currentLevel = 1;
   let score = 1;
 
@@ -73,8 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
       createOptionButton(indexes[1], true);
     }
 
-    timeLeft = 5; // Reset time to 5 seconds for each question
-
+    timeLeft = 5; // Reset time
     clearInterval(timerInterval);
     timerInterval = setInterval(updateTimer, 1000);
   }
@@ -102,21 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateTimer() {
-    elapsedSeconds++;
+    //elapsedSeconds++;
     timerElement.textContent = "TIME: " + timeLeft + "s";
 
     if (timeLeft === 0) {
-      // Time is up, treat it as a wrong answer
       resetGame();
     }
 
-    // Decrease time by 1 second
     timeLeft--;
-
-    // Increase difficulty by reducing the available time as the game progresses
-    if (elapsedSeconds % 10 === 0) {
-      timeLeft = Math.max(1, timeLeft - 1);
-    }
   }
 
   function updateScore() {
@@ -135,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500);
 
     score = 1;
-    elapsedSeconds = 0;
     scoreElement.textContent = `LEVEL ${currentLevel} - QUESTION 1 OUT OF 10`;
     timerElement.textContent = "TIME: 0s";
     clearInterval(timerInterval);
@@ -184,14 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
     optionButton.textContent = countries[index].name;
     optionButton.classList.add("option-button");
 
-    // optionButton.addEventListener("click", function (event) {
-    //   event.stopPropagation();
-    // });
-
-    // optionButton.addEventListener("mousedown", function (event) {
-    //   event.preventDefault();
-    // });
-
     optionButton.addEventListener("mouseover", function () {
       handleMouseOver(isCorrect);
     });
@@ -203,19 +185,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const correctIndex = currentIndex;
     const correctCountry = countries[correctIndex];
     element.textContent = `${correctCountry.name}`;
-    element.style.display = "block"; // Show the correct answer
+    element.style.display = "block"; 
   }
 
   function hideCorrectAnswer(element) {
-    element.style.display = "none"; // Hide the correct answer
+    element.style.display = "none"; 
   }
 
   hintImage.addEventListener("mouseover", function () {
-    showCorrectAnswer(correctAnswerElement); // Show the correct answer when hovering over the lightbulb
+    showCorrectAnswer(correctAnswerElement); 
   });
 
   hintImage.addEventListener("mouseout", function () {
-    hideCorrectAnswer(correctAnswerElement); // Hide the correct answer when not hovering over the lightbulb
+    hideCorrectAnswer(correctAnswerElement); 
   });
 
   optionsContainer.addEventListener("mouseleave", function () {
@@ -225,7 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
       questionAnswered = false;
-      // Simulate a click on the left option button
       optionsContainer.firstChild.style.backgroundColor = "#b8b0c9";
       simulateButtonClick(optionsContainer.firstChild);
     } else if (
@@ -234,7 +215,6 @@ document.addEventListener("DOMContentLoaded", function () {
       event.key === "D"
     ) {
       questionAnswered = false;
-      // Simulate a click on the right option button
       optionsContainer.lastChild.style.backgroundColor = "#b8b0c9";
       simulateButtonClick(optionsContainer.lastChild);
     }
@@ -251,8 +231,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modalContainer.style.display = "block";
     quizContainer.style.display = "none";
-
-    // Additional logic for handling the modal display
   }
 
   function nextLevel() {
@@ -271,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nextLevel();
     });
   }
-  // JavaScript to handle button click event
+
   document.getElementById("go-to-index").addEventListener("click", function () {
     window.location.href = "../index.html";
   });
@@ -320,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(() => {
         buttonClickedAfterTilt = false;
-      }, 1000); // Adjust the delay as needed
+      }, 1000);
     }
   }
 
